@@ -234,7 +234,7 @@ function displayEquipment() {
     itemDiv.classList.add("item");
     itemDiv.innerHTML = `
                 <a href="item.html?id=${item.id}">
-                  <div class="card pt-5 mb-3">
+                  <div class="card mb-4">
                     <div class="card-body"><img class="img-fluid mx-auto d-block" src="${item.image}" /></div>
                     <div class="card-footer">${item.name} - ${item.price}</div>
                   </div>
@@ -317,9 +317,12 @@ function displayEquipmentDetails(data) {
   document.getElementById("reservation-form").addEventListener("submit", (event) => {
     event.preventDefault();
     const name = document.getElementById("name").value;
-    // const email = document.getElementById("email").value;
+    var myModal = document.getElementById('reservationForm');
+    var modal = bootstrap.Modal.getInstance(myModal)
     alert(`Thank you, ${name}! Your reservation has been received for ${data.name}.`);
+    // hiding the modal after submit
     document.getElementById("reservation-form").reset();
+    modal.hide();
   });
 }
 
@@ -342,6 +345,14 @@ $(document).ready(function () {
   //this should only run in the home page
   if (!id) {
     displayEquipment();
+
+    // on hover adding a border
+    $(".item .card").hover(function(){
+      $(this).css("border", "1px solid");
+      }, function(){
+      $(this).css("border", "1px solid rgba(0, 0, 0, 0.175)");
+    });
+
     // Search filter for search bar
     $("#myInput").on("keyup", function () {
       var value = $(this).val().toLowerCase();
